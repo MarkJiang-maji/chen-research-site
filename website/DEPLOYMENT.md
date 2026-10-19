@@ -10,6 +10,10 @@
 
 The frontend Worker serves the HTML built from this repository. It forwards `/api/*`, `/workspace`, `/legacy`, and `/_data/*` to the existing data service. Passwords, sessions, uploaded files, snapshots and editable research documents remain in that service. Do not delete or replace it when deploying this repository.
 
+## Current delivery status
+
+The production hostname still uses the original Sites project. The preview Worker is deployed. Native Workers Builds integration is awaiting approval for the official GitHub App installation scoped only to this public repository; production DNS and Worker routes have not been changed. Until that is complete, Git pushes run checks but do not publish production.
+
 ## Git deployment settings
 
 Use Cloudflare Workers Builds with repository `MarkJiang-maji/chen-research-site`, production branch `main`, root directory `/`, build command `npm run build`, and deploy command `npx wrangler deploy`. Cloudflare installs the pinned npm dependencies from `package-lock.json`.

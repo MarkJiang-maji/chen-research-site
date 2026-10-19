@@ -7,6 +7,6 @@
 - `src/content-merge.mjs`：GitHub內容與現有雲端編輯的三方合併；衝突時保留雲端較新修改。
 - `src/worker.mjs`：提供網站，將資料、登入及檔案API轉到既有後端，不建立或清空資料庫。
 
-修改後推送main，Cloudflare執行`npm run build`與`npx wrangler deploy`。GitHub編輯與網站雲端編輯不同：前者觸發建置，後者即時保存進度。網站雲端編輯不會自行提交GitHub。網頁新增報告、講稿、原始檔及密碼均沿用原有雲端後端。GitHub與雲端同時改同一欄位時，先保留雲端內容；需要統一版本時再人工合併。
+Cloudflare原生Git建置接線仍待GitHub App授權。完成後，推送main將執行`npm run build`與`npx wrangler deploy`；目前GitHub只執行檢查，正式站由Sites發布。GitHub編輯與網站雲端編輯不同：前者觸發建置，後者即時保存進度。網站雲端編輯不會自行提交GitHub。網頁新增報告、講稿、原始檔及密碼均沿用原有雲端後端。GitHub與雲端同時改同一欄位時，先保留雲端內容；需要統一版本時再人工合併。
 
 原始錄音、PDF與完整實驗封存仍在原私人研究repo與雲端檔案區；這個public repo只負責網站程式及已公開的研究說明。不要加入密碼、OAuth token、私鑰或資料庫匯出。
