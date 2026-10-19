@@ -2,6 +2,12 @@
   "name": "chen-research-site",
   "private": true,
   "type": "module",
-  "scripts": {"build":"node website/scripts/build.mjs", "test":"node --test website/tests/*.test.mjs", "deploy":"wrangler deploy"},
-  "devDependencies": {"wrangler":"4.128.0"}
+  "scripts": {
+    "build": "node website/scripts/build.mjs",
+    "test": "node --test website/tests/*.test.mjs",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.151.2"
+  }
 }
