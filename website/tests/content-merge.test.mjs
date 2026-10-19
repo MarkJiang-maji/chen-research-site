@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {mergeContent,loadContent,contentForSave,loadReports,reportsForSave} from '../src/content-merge.mjs';
+test('repo edit applies while unrelated cloud work survives',()=>{const b={title:'old',progress:1};assert.deepEqual(mergeContent(b,{...b,title:'new'},{...b,progress:2}),{title:'new',progress:2});});
+test('same field conflict preserves cloud edit',()=>assert.equal(mergeContent('base','repo','cloud'),'cloud'));
+test('cloud-added report and notes survive later repo release',()=>{const b=[{id:'one',title:'old',notes:'original'}],r=[{...b[0],title:'new'}],c=[{id:'two',title:'new cloud report'}, {...b[0],notes:'my notes'}];assert.deepEqual(loadReports(r,b,c),[c[0],{id:'one',title:'new',notes:'my notes'}]);});
+test('editing after deployment records the correct base for future repo updates',()=>{const first={title:'first',progress:1},repo={...first,title:'second'},saved=contentForSave({...repo,progress:2},repo),next={...repo,title:'third'};assert.deepEqual(loadContent(next,first,saved),{title:'third',progress:2});});
+test('report metadata does not duplicate itself and permits later title change',()=>{const b=[{id:'a',title:'v1',notes:'n'}],r=[{...b[0],title:'v2'}],saved=reportsForSave([{...r[0],notes:'edited'}],r),next=[{...r[0],title:'v3'}];assert.deepEqual(loadReports(next,b,saved),[{id:'a',title:'v3',notes:'edited'}]);});

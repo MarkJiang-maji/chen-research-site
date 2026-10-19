@@ -1,0 +1,123 @@
+{
+  "config": {
+    "protocol_version": "2026-10-19-fixed-v1",
+    "replicates": 200,
+    "seed_start": 2610190,
+    "length": 360,
+    "event_time": 120,
+    "pre_event_start": 60,
+    "baseline_increment_variance": 0.0025,
+    "event_magnitude_uniform": [
+      2.0,
+      4.0
+    ],
+    "event_sign_probability": 0.5,
+    "y_noise_variance": 0.25,
+    "z_noise_variance": 0.09,
+    "z_true_loading": 1.0,
+    "filter_process_variance_per_coordinate": 0.02,
+    "initial_mean": 0.0,
+    "initial_variance_per_coordinate": 10.0,
+    "dual_assumed_loadings": [
+      1.0,
+      0.5,
+      -1.0
+    ],
+    "bootstrap_seed": 731091,
+    "bootstrap_replicates": 10000,
+    "prefix_lengths": [
+      120,
+      180,
+      300
+    ],
+    "primary": "dual_correct vs single_y_kf post-event MSE, average paired worlds within seed",
+    "inference_unit": "independent seed, retaining both worlds and all methods together",
+    "warnings": [
+      "synthetic toy, not market evidence",
+      "extra information, not a new algorithm",
+      "no tuning",
+      "not a reproduction of professor's model"
+    ]
+  },
+  "primary": {
+    "contrast": "dual_correct vs single_y_kf post-event MSE, average paired worlds within seed",
+    "n_independent_seed_pairs": 200,
+    "mse_difference_dual_minus_single": -4.451643201757903,
+    "mse_difference_percentile_95_ci": [
+      -4.697200530437328,
+      -4.208567525738694
+    ],
+    "mse_relative_reduction": 0.9928396915476098,
+    "mse_relative_reduction_percentile_95_ci": [
+      0.992545481596088,
+      0.9931075700100546
+    ]
+  },
+  "methods": [
+    {
+      "method": "single_y_kf",
+      "mean_paired_world_post_event_mse": 4.483748222050641,
+      "seed_bootstrap_mean_mse_95_ci": [
+        4.240205794045882,
+        4.7299331497460795
+      ],
+      "mean_pre_event_mse": 0.038470370073952605,
+      "mean_post_event_mse_by_world": {
+        "true_jump": 0.08881071928518817,
+        "persistent_contamination": 8.878685724816094
+      }
+    },
+    {
+      "method": "dual_correct",
+      "mean_paired_world_post_event_mse": 0.032105020292738866,
+      "seed_bootstrap_mean_mse_95_ci": [
+        0.03136080773907845,
+        0.03284425919857633
+      ],
+      "mean_pre_event_mse": 0.020153165954489207,
+      "mean_post_event_mse_by_world": {
+        "true_jump": 0.04177832509533928,
+        "persistent_contamination": 0.02243171549013845
+      }
+    },
+    {
+      "method": "dual_loading_half",
+      "mean_paired_world_post_event_mse": 5.026469853001149,
+      "seed_bootstrap_mean_mse_95_ci": [
+        4.617537775680203,
+        5.455240446892289
+      ],
+      "mean_pre_event_mse": 0.2204954228162709,
+      "mean_post_event_mse_by_world": {
+        "true_jump": 9.404562836483997,
+        "persistent_contamination": 0.6483768695183016
+      }
+    },
+    {
+      "method": "dual_loading_wrong_sign",
+      "mean_paired_world_post_event_mse": 20.62668656421175,
+      "seed_bootstrap_mean_mse_95_ci": [
+        18.949890454428946,
+        22.390347269623938
+      ],
+      "mean_pre_event_mse": 0.8445674011668575,
+      "mean_post_event_mse_by_world": {
+        "true_jump": 38.763714669963136,
+        "persistent_contamination": 2.4896584584603647
+      }
+    }
+  ],
+  "mean_single_stream_post_event_mse_lower_bound": 2.256703440456369,
+  "checks": {
+    "paired_y_exactly_equal_all_200_seeds": true,
+    "single_y_estimates_exactly_equal_all_200_seeds": true,
+    "z_world_difference_equals_step_max_abs_error": 8.881784197001252e-16,
+    "pair_loss_identity_max_abs_error": 5.329070518200751e-15,
+    "all_single_stream_pair_losses_above_bound_with_tolerance_1e_12": true,
+    "prefix_invariance_all_passed": true,
+    "prefix_checks_count": 4800,
+    "single_observation_matrix_rank": 1,
+    "correct_dual_observation_matrix_rank": 2
+  },
+  "interpretation": "The correct second sensor supplies extra information. Loading misspecification changes the meaning of the inferred state. No new algorithm, financial pricing result, or market-valid sensor is established."
+}

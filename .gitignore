@@ -1,0 +1,18 @@
+# This project publishes only its website source. Research caches stay local/private.
+/*
+!/.gitignore
+!/README.md
+!/AGENTS.md
+!/package.json
+!/package-lock.json
+!/wrangler.jsonc
+!/website/
+!/website/**
+!/.github/
+!/.github/**
+/website/dist/
+/node_modules/
+**/.env
+**/.env.*
+**/.dev.vars
+**/node_modules/
