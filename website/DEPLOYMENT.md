@@ -12,7 +12,7 @@ The frontend Worker serves the HTML built from this repository. It forwards `/ap
 
 ## Current delivery status
 
-The production hostname still uses the original Sites project. The preview Worker is deployed. Native Workers Builds integration is awaiting approval for the official GitHub App installation scoped only to this public repository; production DNS and Worker routes have not been changed. Until that is complete, Git pushes run checks but do not publish production.
+The production hostname still uses the original Sites project. The preview Worker is deployed. The official GitHub App installation has been approved and completed, scoped only to this public repository. The native Workers Builds connection is paused before creating its deployment token: the dashboard default additionally grants account-wide storage and other resource permissions, so separate confirmation is pending. Production DNS and active Worker routes have not been changed; wrangler.jsonc contains the prepared production route. Until that is complete, Git pushes run checks but do not publish production.
 
 ## Git deployment settings
 

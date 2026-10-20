@@ -3,7 +3,19 @@
   "name": "chen-research-site",
   "main": "website/src/worker.mjs",
   "compatibility_date": "2026-10-19",
-  "assets": {"directory":"website/dist", "binding":"ASSETS", "run_worker_first":true},
+  "assets": {
+    "directory": "website/dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
   "workers_dev": true,
-  "observability": {"enabled":true}
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "research.tarwick.com/*",
+      "zone_name": "tarwick.com"
+    }
+  ]
 }
