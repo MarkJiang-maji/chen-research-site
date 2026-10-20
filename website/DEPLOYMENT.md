@@ -22,6 +22,8 @@ Use Cloudflare Workers Builds with repository `MarkJiang-maji/chen-research-site
 
 A GitHub Actions workflow independently runs the merge tests and build. `/release.json` reports the commit actually served by the frontend. A successful GitHub check alone does not prove that Cloudflare deployed the commit; compare this endpoint with the repository's main HEAD.
 
+After a push to `main`, the `production` GitHub Actions job waits for Cloudflare and checks the production hostname from a GitHub-hosted runner. It validates HTTPS normally, the exact commit, frontend routing, five cloud data endpoints and partial audio delivery. This check is read-only and uses no credentials. A failure reports a delivery problem after deployment; it does not automatically roll back or modify research data.
+
 ## Content editing
 
 Edit `website/data/content.json` and `website/data/reports.json` in GitHub or a cloud editor, then commit to `main`. Edit JavaScript and CSS in `website/src/` to change the interface. No local computer is required for production builds.

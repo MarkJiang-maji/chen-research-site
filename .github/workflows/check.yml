@@ -1,5 +1,10 @@
 name: Website checks
 on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -11,3 +16,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+  production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify the deployed commit, HTTPS and cloud data
+        run: node website/scripts/check-live.mjs "$GITHUB_SHA"
