@@ -14,11 +14,11 @@ The frontend Worker serves the HTML built from this repository. It forwards `/ap
 
 The official GitHub App installation is restricted to this public repository. Cloudflare Workers Builds is connected to `main` using the approved `chen-research-site cloud builds` deployment token. The token is stored by Cloudflare; no token value is committed here or copied into GitHub.
 
-The first push-triggered deployment and production routing verification are in progress. The original data backend remains unchanged. The configured production route uses tarwick.com's explicit zone ID to avoid a zone-name lookup during deployment.
+Push-triggered cloud deployment and the production hostname were verified on 2026-10-20. The existing research CNAME target is preserved and its proxy is enabled; `research.tarwick.com/*` routes to this Worker. The original data backend remains unchanged. The configured production route uses tarwick.com's explicit zone ID to avoid a zone-name lookup during deployment.
 
 ## Git deployment settings
 
-Use Cloudflare Workers Builds with repository `MarkJiang-maji/chen-research-site`, production branch `main`, root directory `/`, build command `npm run build`, and deploy command `npx wrangler deploy`. Cloudflare installs the pinned npm dependencies from `package-lock.json`.
+Use Cloudflare Workers Builds with repository `MarkJiang-maji/chen-research-site`, production branch `main`, root directory `/`, build command `npm run build`, and deploy command `npx wrangler deploy`. Cloudflare installs the pinned npm dependencies from `package-lock.json`. The `prebuild` script runs the tests and frontend/Worker JavaScript syntax checks before compiling. Build or test failures stop deployment. Preview branch builds are disabled; production follows `main`.
 
 A GitHub Actions workflow independently runs the merge tests and build. `/release.json` reports the commit actually served by the frontend. A successful GitHub check alone does not prove that Cloudflare deployed the commit; compare this endpoint with the repository's main HEAD.
 
@@ -34,8 +34,10 @@ Repository changes become persistent backend edits only if an authenticated edit
 
 Roll back frontend code through a Git revert on `main` or a Cloudflare Worker deployment rollback. This does not roll back research documents stored in the backend.
 
-To return traffic entirely to the original Sites frontend, remove only the `research.tarwick.com/*` Worker route and restore the previous DNS proxy state if required. Keep the existing hostname's CNAME target and original Sites custom-domain binding. Do not delete research data or change unrelated `tarwick.com` records.
+To return traffic entirely to the original Sites frontend, remove only the `research.tarwick.com/*` Worker route and restore the previous DNS proxy state if required. The prior DNS proxy state was DNS-only. Keep the existing hostname's CNAME target and original Sites custom-domain binding. Do not delete research data or change unrelated `tarwick.com` records.
 
 ## Verification
 
 Before and after a routing change, compare the file inventory, snapshot, presentation, content and reports with the preserved baseline. Verify existing-password login, authenticated session and logout, and a partial audio read. Verify `/release.json` against the GitHub commit after a push-triggered build. The local audit folder is intentionally excluded from the public repository.
+
+The deployment token was explicitly approved and is retained only by Cloudflare. Manage its lifecycle in Cloudflare; never commit its value to this repository. The original Sites project still hosts the data API, uploaded files and history, so keep it active.
