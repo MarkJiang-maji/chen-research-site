@@ -15,7 +15,7 @@
   "routes": [
     {
       "pattern": "research.tarwick.com/*",
-      "zone_name": "tarwick.com"
+      "zone_id": "a3e2edfc8f6b35c3905276eb2c16f8e2"
     }
   ]
 }

@@ -12,7 +12,9 @@ The frontend Worker serves the HTML built from this repository. It forwards `/ap
 
 ## Current delivery status
 
-The production hostname still uses the original Sites project. The preview Worker is deployed. The official GitHub App installation has been approved and completed, scoped only to this public repository. The native Workers Builds connection is paused before creating its deployment token: the dashboard default additionally grants account-wide storage and other resource permissions, so separate confirmation is pending. Production DNS and active Worker routes have not been changed; wrangler.jsonc contains the prepared production route. Until that is complete, Git pushes run checks but do not publish production.
+The official GitHub App installation is restricted to this public repository. Cloudflare Workers Builds is connected to `main` using the approved `chen-research-site cloud builds` deployment token. The token is stored by Cloudflare; no token value is committed here or copied into GitHub.
+
+The first push-triggered deployment and production routing verification are in progress. The original data backend remains unchanged. The configured production route uses tarwick.com's explicit zone ID to avoid a zone-name lookup during deployment.
 
 ## Git deployment settings
 
