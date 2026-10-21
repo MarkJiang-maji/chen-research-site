@@ -1,7 +1,7 @@
 import fs from 'node:fs';import path from 'node:path';import {execFileSync} from 'node:child_process';import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..'),dir=path.join(root,'website');
 const read=n=>JSON.parse(fs.readFileSync(path.join(dir,'data',n+'.json'),'utf8'));
-const seed={content:read('content'),reports:read('reports'),baseContent:read('content-base'),baseReports:read('reports-base'),transcript:read('transcript'),e6:read('e6'),e7:read('e7')};
+const seed={content:read('content'),reports:read('reports'),baseContent:read('content-base'),baseReports:read('reports-base'),transcript:read('transcript'),e6:read('e6'),e7:read('e7'),e8:read('e8')};
 const aids=fs.readFileSync(path.join(dir,'src/reading-aids.mjs'),'utf8').replace(/^export /gm,'');
 const css=fs.readFileSync(path.join(dir,'src/style.css'),'utf8'),helpers=fs.readFileSync(path.join(dir,'src/content-merge.mjs'),'utf8').replace(/^export /gm,''),js=fs.readFileSync(path.join(dir,'src/app.js'),'utf8');
 let commit='local';try{commit=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim()}catch{}

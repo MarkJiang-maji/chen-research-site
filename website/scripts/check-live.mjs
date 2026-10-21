@@ -69,3 +69,19 @@ assert.equal(deck.status,206);
 const deckBytes=new Uint8Array(await deck.arrayBuffer());
 assert.equal(deckBytes.byteLength,128);assert.equal(deckBytes[0],80);assert.equal(deckBytes[1],75);
 console.log('E7 editable PPTX partial read verified.');
+
+assert.equal(seed.e8.periods,24);
+assert.equal(seed.e8.shared_b_candidates,21);
+assert.equal(seed.reports.find(x=>x.id==='e8')?.slides.length,7);
+assert.ok(html.includes('function e8Experiment()'));
+assert.ok(html.includes('id="e8BoundView"'));
+for(const path of ['research/e8/PROTOCOL.md','research/e8/FINDINGS.md','results/e8/summary.json','results/e8/validation.json']){
+ const response=await get('/api/workspace/file?path='+encodeURIComponent(path));
+ const body=await response.text();assert.ok(body.length>50,`${path}: missing E8 evidence`);
+ if(path.endsWith('validation.json'))assert.equal(JSON.parse(body).status,'passed');
+ console.log(`E8 evidence readable: ${path}`);
+}
+const e8deck=await get('/api/workspace/file?path='+encodeURIComponent('meetings/2026-10-21/e8/Chen_E8_20261021.pptx'),{range:'bytes=0-127'});
+assert.equal(e8deck.status,206);
+const e8bytes=new Uint8Array(await e8deck.arrayBuffer());assert.equal(e8bytes.byteLength,128);assert.equal(e8bytes[0],80);assert.equal(e8bytes[1],75);
+console.log('E8: 24 periods, 21 shared-b paths, conditional-range controls and seven-slide editable meeting verified.');
