@@ -32,7 +32,15 @@ for (let attempt = 0; attempt < 30; attempt++) {
 assert.ok(deployed, 'Production did not serve the expected commit in time');
 const home = await get('/');
 assert.equal(home.headers.get('x-research-delivery'), 'github-cloudflare');
-assert.ok((await home.text()).includes('chen-research-site'));
+const html=await home.text();
+assert.ok(html.includes('chen-research-site'));
+const seedMatch=html.match(/<script>const SEED=(.*?)<\/script>/s);
+assert.ok(seedMatch, 'Reviewed website data missing');
+const seed=JSON.parse(seedMatch[1].replace(/;$/, ''));
+assert.equal(seed.e7.profile_solved,41);
+assert.equal(seed.reports.find(x=>x.id==='e7')?.slides.length,7);
+assert.ok(html.includes('function e7Experiment()'));
+console.log('E7 page, 41 equivalence solutions and seven-slide meeting included in deployed source.');
 for (const path of [
   '/api/workspace/files', '/api/snapshot', '/api/presentation',
   '/api/workspace/file?path=workstation%2Fcontent.json',
@@ -48,3 +56,16 @@ const audio = await get('/api/workspace/file?path=' + encodeURIComponent('source
 assert.equal(audio.status, 206);
 assert.equal((await audio.arrayBuffer()).byteLength, 128);
 console.log('Audio partial read verified; no cloud data was changed.');
+
+for (const path of ['research/e7/PROTOCOL.md','research/e7/FINDINGS.md','results/e7/summary.json','results/e7/validation.json']) {
+ const response=await get('/api/workspace/file?path='+encodeURIComponent(path));
+ const text=await response.text();
+ assert.ok(text.length>50, `${path}: missing E7 evidence`);
+ if(path.endsWith('validation.json'))assert.equal(JSON.parse(text).status,'passed');
+ console.log(`E7 cloud evidence readable: ${path}`);
+}
+const deck=await get('/api/workspace/file?path='+encodeURIComponent('meetings/2026-10-21/e7/Chen_E7_20261021.pptx'),{range:'bytes=0-127'});
+assert.equal(deck.status,206);
+const deckBytes=new Uint8Array(await deck.arrayBuffer());
+assert.equal(deckBytes.byteLength,128);assert.equal(deckBytes[0],80);assert.equal(deckBytes[1],75);
+console.log('E7 editable PPTX partial read verified.');

@@ -1,0 +1,83 @@
+{
+  "scope": "Conditional static synthetic pricing-map identification; no filter novelty or real-market liquidity valuation",
+  "grid_points": 143,
+  "valid_grid_points": 143,
+  "full_numeric_rank_points": 133,
+  "condition_min": 45.8481907180123,
+  "condition_median": 812.2156683509014,
+  "condition_max": null,
+  "infinite_condition_count": 1,
+  "finite_condition_max": 63487977060278.2,
+  "max_jac_relative_step_difference": 3.816373129603595e-08,
+  "profile_solved": 41,
+  "profile_b_min": 0.007886732605574962,
+  "profile_b_max": 0.013969414414785443,
+  "profile_discount_min": 5.409647099517098,
+  "profile_discount_max": 15.588251461215265,
+  "profile_max_both_log_residual": 9.094947017729282e-13,
+  "all_start_fits": 1548,
+  "optimizer_success_count": 1548,
+  "invalid_optimizer_evaluations": 0,
+  "correct_noiseless_max_log_state_mse": 4.1809627976713626e-29,
+  "noiseless_by_b": [
+    {
+      "b_scale": 0.9,
+      "log_state_mse": 0.11649699958141138,
+      "discount_relative_sq_error": 0.04779710552529884,
+      "loss": 1.2818989709841442e-28
+    },
+    {
+      "b_scale": 1.0,
+      "log_state_mse": 1.6861901849099127e-29,
+      "discount_relative_sq_error": 3.032184104443264e-30,
+      "loss": 1.2572470676959876e-28
+    },
+    {
+      "b_scale": 1.1,
+      "log_state_mse": 0.09034440084243434,
+      "discount_relative_sq_error": 0.03200019056179382,
+      "loss": 6.162975822039155e-30
+    }
+  ],
+  "noisy_by_b": [
+    {
+      "b_scale": 0.9,
+      "seeds": 30,
+      "mean_log_state_mse": 0.8745358286241215,
+      "median_seed_log_state_mse": 0.880251028276279,
+      "q25_seed_log_state_mse": 0.6587705334160305,
+      "q75_seed_log_state_mse": 1.142310536101431,
+      "mean_discount_relative_sq_error": 0.34227566778284085,
+      "mean_observation_loss": 0.25890096827673303,
+      "selected_boundary_count": 55
+    },
+    {
+      "b_scale": 1.0,
+      "seeds": 30,
+      "mean_log_state_mse": 0.8311833169911378,
+      "median_seed_log_state_mse": 0.8332332798081331,
+      "q25_seed_log_state_mse": 0.6050432718226019,
+      "q75_seed_log_state_mse": 1.0768947790243772,
+      "mean_discount_relative_sq_error": 0.2974379706239881,
+      "mean_observation_loss": 0.23768320732509704,
+      "selected_boundary_count": 46
+    },
+    {
+      "b_scale": 1.1,
+      "seeds": 30,
+      "mean_log_state_mse": 0.7957063250275821,
+      "median_seed_log_state_mse": 0.7607133789177346,
+      "q25_seed_log_state_mse": 0.5668713453808131,
+      "q75_seed_log_state_mse": 1.0277636195138495,
+      "mean_discount_relative_sq_error": 0.2534198753966186,
+      "mean_observation_loss": 0.25594477442900393,
+      "selected_boundary_count": 46
+    }
+  ],
+  "warnings": [
+    "Local numeric rank is not global/dynamic/unknown-parameter identification.",
+    "b perturbation is a fixed sensitivity exercise, not algorithm comparison.",
+    "E4 figure and gross-return notation differences remain unresolved.",
+    "States and volume are synthetic, not observed market fundamentals or liquidity."
+  ]
+}
